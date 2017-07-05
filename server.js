@@ -13,7 +13,7 @@ app.get('/api/:URL', (req, res)=>{
   url.save((err, data) => {
       let codedID = encodeID(data._id)
       console.log(`getCodedID: ${codedID}`)
-      res.status(200).send(`http://${req.hostname}/${codedID}`)
+      res.status(200).send({ "original_url":req.params.URL, "short_url":`http://${req.hostname}/${codedID}` })
   })
 })
 
@@ -43,7 +43,7 @@ app.get("/", function (request, response) {
   response.sendFile(__dirname + '/index.html');
 })
 
-let server = app.listen(process.env.PORT, ()=>{
+let server = app.listen(process.env.PORT || 8080, ()=>{
   var port = server.address().port;
   console.log("App now running on port", port);
 })
