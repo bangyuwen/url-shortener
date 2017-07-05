@@ -4,6 +4,10 @@ const encodeID = require('./crypto').encodeID
 const decodeID = require('./crypto').decodeID
 const app = express()
 
+app.get('/favicon.ico', function(req, res) {
+    res.send(204);
+})
+
 app.get('/api/:URL', (req, res)=>{
   let url = new Url({url: req.params.URL, clicks:0})
   url.save((err, data) => {
